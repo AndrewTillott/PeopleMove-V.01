@@ -132,7 +132,7 @@
                 <div class="section-lg">
                   <h3 class="text-uppercase wow-outer"><span class="wow slideInDown">Contact Us</span></h3>
                   <!-- RD Mailform-->
-                  <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                  <form id="add-cafe-form" class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
                     <div class="row row-10">
                       <div class="col-md-6 wow-outer">
                         <div class="form-wrap wow fadeSlideInUp">
@@ -143,7 +143,7 @@
                       <div class="col-md-6 wow-outer">
                         <div class="form-wrap wow fadeSlideInUp">
                           <label class="form-label-outside" for="contact-last-name">Last Name</label>
-                          <input class="form-input" id="contact-last-name" type="text" name="name" data-constraints="@Required">
+                          <input class="form-input" id="contact-last-name" type="text" name="secondName" data-constraints="@Required">
                         </div>
                       </div>
                       <div class="col-md-6 wow-outer">
@@ -280,6 +280,31 @@
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
+    <script>
+      // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDZ1kRP9e1C62zKD8ZY4zsHRfurVJkbl4M",
+  authDomain: "peoplemove-f1beb.firebaseapp.com",
+  projectId: "peoplemove-f1beb",
+  storageBucket: "peoplemove-f1beb.appspot.com",
+  messagingSenderId: "413012013245",
+  appId: "1:413012013245:web:171c93f031c5e8f114c7d4",
+  measurementId: "G-Z9E09B8F5Z"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = firebase.firestore();
+db.settings({timestampsInSnapshots: true});
+    </script>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
   </body>
