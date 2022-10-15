@@ -3,7 +3,7 @@ const form = document.querySelector('#add-cafe-form');
 // saving data
 form.addEventListener('submit', (e) =>{
     e.preventDefault();
-    db.collection('cafes').add({
+    db.collection('ContactUs').add({
         name: form.name.value,
         name: form.secondName.value,
         name: form.email.value,
