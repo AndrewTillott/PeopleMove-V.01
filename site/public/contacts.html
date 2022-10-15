@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css" id="main-styles-link">
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+    
   </head>
   <body>
     <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -132,7 +133,7 @@
                 <div class="section-lg">
                   <h3 class="text-uppercase wow-outer"><span class="wow slideInDown">Contact Us</span></h3>
                   <!-- RD Mailform-->
-                  <form id="add-cafe-form" class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
+                  <form class="rd-form rd-mailform add" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php">
                     <div class="row row-10">
                       <div class="col-md-6 wow-outer">
                         <div class="form-wrap wow fadeSlideInUp">
@@ -280,9 +281,15 @@
     <!-- Global Mailform Output-->
     <div class="snackbars" id="form-output-global"></div>
     <!-- Javascript-->
+   
     <script>
       // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+      import { initializeApp } from 'firebase/app'
+import {
+  getFirestore, collection, getDocs,
+  addDoc, deleteDoc, doc
+} from 'firebase/firestore'
+
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -302,9 +309,40 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = firebase.firestore();
-db.settings({timestampsInSnapshots: true});
+
+//init firebase app
+initializeApp(firebaseConfig)
+
+const db = get.Firestore();
+db.settings({
+  timestampInSnapshots: true,
+})
+
+// collection ref
+const colRef = collection(db, 'ContactUs')
+
+
+//test can remove
+const addBookForm = document.querySelector('.add');
+addBookForm.addEventListener('submit', (e) =>{
+    e.preventDefault();
+    
+    addDoc(colRef, {
+      name: addBookForm.name.value,
+      secondName: addBookForm.secondName.value,
+      email: addBookForm.email.value,
+      phone: addBookForm.phone.value,
+      message: addBookForm.message.value,
+
+    })
+    .then(()=>{
+      addBookForm.reset();
+    })
+})
+
+
     </script>
+   
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
   </body>
